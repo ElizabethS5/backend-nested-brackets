@@ -17,7 +17,7 @@ def get_lines(filename):
 
 
 def string_to_list(string):
-    """Takes a string and puts brackets in list"""
+    """Takes a string and puts characters in a list"""
     brackets = []
     copy = string[:]
     while copy:
