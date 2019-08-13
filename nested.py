@@ -31,7 +31,7 @@ def string_to_list(string):
 
 
 def test_bracket_list(bracket_list):
-    """If bracket_list passes return 'Yes' else return 'No' and failing index"""
+    """If bracket_list passes return 'Yes' else return 'No' and failing position"""
     copy = bracket_list[:]
     greater_less = [0]
     curly = [0]
@@ -90,13 +90,14 @@ def test_bracket_list(bracket_list):
 
 
 def write_output(string):
+    """Write string to file"""
     f = open('output.txt', 'w')
     f.write(string)
     f.close()
 
 
 def main(args):
-    """Add your code here"""
+    """Use input.txt to write output.txt"""
     lines_from_input = get_lines('input.txt')
     bracket_lists = [string_to_list(line) for line in lines_from_input]
     output = ''
