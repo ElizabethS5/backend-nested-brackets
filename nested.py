@@ -44,31 +44,31 @@ def test_bracket_list(bracket_list):
     while position <= len(bracket_list):
         if copy[0] == '>':
             if len(greater_less) == 1 or greater_less[-1] < max(combo):
-                return f'No {position}\n'
+                return f'NO {position}\n'
             else:
                 greater_less.pop()
         elif copy[0] == '}':
             if len(curly) == 1 or curly[-1] < max(combo):
-                return f'No {position}\n'
+                return f'NO {position}\n'
             else:
                 curly.pop()
         elif copy[0] == ']':
             if len(square) == 1 or square[-1] < max(combo):
-                return f'No {position}\n'
+                return f'NO {position}\n'
             else:
                 square.pop()
         elif copy[0] == ')':
             if len(paren) == 1 or paren[-1] < max(combo):
-                return f'No {position}\n'
+                return f'NO {position}\n'
             else:
                 paren.pop()
         elif copy[0] == '*)':
             if len(aster) == 1 or aster[-1] < max(combo):
-                return f'No {position}\n'
+                return f'NO {position}\n'
             else:
                 aster.pop()
         elif len(copy) == 1 and copy[0][0] in '<[{(':
-            return f'No {position}\n'
+            return f'NO {position}\n'
         elif copy[0] == '<':
             greater_less.append(position)
         elif copy[0] == '{':
@@ -84,9 +84,9 @@ def test_bracket_list(bracket_list):
         combo = [greater_less[-1], curly[-1],
                  square[-1], paren[-1], aster[-1]]
     if max(combo) != 0:
-        return f'No {position}\n'
+        return f'NO {position}\n'
     else:
-        return 'Yes\n'
+        return 'YES\n'
 
 
 def write_output(string):
