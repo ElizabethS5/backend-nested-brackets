@@ -24,9 +24,6 @@ def string_to_list(string):
         if copy[:2] == '(*' or copy[:2] == '*)':
             brackets.append(copy[:2])
             copy = copy[2:]
-        elif copy[0] in '()[]{}<>':
-            brackets.append(copy[0])
-            copy = copy[1:]
         else:
             brackets.append(copy[0])
             copy = copy[1:]
