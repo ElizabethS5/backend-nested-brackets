@@ -30,40 +30,40 @@ def string_to_list(string):
     return brackets
 
 
-def test_bracket_list(bracket_list):
+def test_line_list(bracket_list):
     """If bracket_list passes return 'Yes' else return 'No' and failing position"""
     copy = bracket_list[:]
-    all_list = []
-    rights = '>}])'
-    lefts = '<{[('
+    stack = []
+    closing_brackets = '>}])'
+    opening_brackets = '<{[('
     position = 1
     while copy:
-        if copy[0][-1] in rights:
-            if len(all_list) == 0:
-                return f"NO {position}\n"
-            elif copy[0] == '>' and all_list[-1] == '<':
-                all_list.pop()
-            elif copy[0] == ']' and all_list[-1] == '[':
-                all_list.pop()
-            elif copy[0] == '}' and all_list[-1] == '{':
-                all_list.pop()
-            elif copy[0] == ')' and all_list[-1] == '(':
-                all_list.pop()
-            elif copy[0] == '*)' and all_list[-1] == '(*':
-                all_list.pop()
+        if copy[0][-1] in closing_brackets:
+            if len(stack) == 0:
+                return f"NO {position}"
+            elif copy[0] == '>' and stack[-1] == '<':
+                stack.pop()
+            elif copy[0] == ']' and stack[-1] == '[':
+                stack.pop()
+            elif copy[0] == '}' and stack[-1] == '{':
+                stack.pop()
+            elif copy[0] == ')' and stack[-1] == '(':
+                stack.pop()
+            elif copy[0] == '*)' and stack[-1] == '(*':
+                stack.pop()
             else:
-                return f"NO {position}\n"
-        elif copy[0][0] in lefts:
+                return f"NO {position}"
+        elif copy[0][0] in opening_brackets:
             if len(copy) == 1:
                 return f"NO {position}"
             else:
-                all_list.append(copy[0])
+                stack.append(copy[0])
         position += 1
         copy.pop(0)
-    if len(all_list) != 0:
-        return f'NO {position}\n'
+    if len(stack) != 0:
+        return f'NO {position}'
     else:
-        return 'YES\n'
+        return 'YES'
 
 
 def write_output(string):
@@ -76,10 +76,9 @@ def write_output(string):
 def main(args):
     """Use input.txt to write output.txt"""
     lines_from_input = get_lines('input.txt')
-    bracket_lists = [string_to_list(line) for line in lines_from_input]
-    output = ''
-    for bracket_list in bracket_lists:
-        output += test_bracket_list(bracket_list)
+    line_lists = [string_to_list(line) for line in lines_from_input]
+    output = '\n'.join([test_line_list(line_list)
+                        for line_list in line_lists])
     write_output(output)
 
 
