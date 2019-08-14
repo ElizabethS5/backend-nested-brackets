@@ -18,27 +18,25 @@ def get_lines(filename):
 
 def string_to_list(string):
     """Takes a string and puts characters in a list"""
-    brackets = []
+    line_list = []
     copy = string[:]
     while copy:
         if copy[:2] == '(*' or copy[:2] == '*)':
-            brackets.append(copy[:2])
+            line_list.append(copy[:2])
             copy = copy[2:]
         else:
-            brackets.append(copy[0])
+            line_list.append(copy[0])
             copy = copy[1:]
-    return brackets
+    return line_list
 
 
-def test_line_list(bracket_list):
-    """If bracket_list passes return 'Yes' else return 'No' and failing position"""
-    copy = bracket_list[:]
+def test_line_list(line_list):
+    """If line_list passes return 'Yes' else return 'No' and failing position"""
+    copy = line_list[:]
     stack = []
-    closing_brackets = '>}])'
-    opening_brackets = '<{[('
     position = 1
     while copy:
-        if copy[0][-1] in closing_brackets:
+        if copy[0][-1] in '>}])':
             if len(stack) == 0:
                 return f"NO {position}"
             elif copy[0] == '>' and stack[-1] == '<':
@@ -53,7 +51,7 @@ def test_line_list(bracket_list):
                 stack.pop()
             else:
                 return f"NO {position}"
-        elif copy[0][0] in opening_brackets:
+        elif copy[0][0] in '<{[(':
             if len(copy) == 1:
                 return f"NO {position}"
             else:
